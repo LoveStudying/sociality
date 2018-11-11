@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EZDate</title>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css">
+    <style>
+        #listBody tr{
+            cursor:pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <!--导航栏-->
+                <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                    <a class="navbar-brand" href="#">EZDate</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarColor02">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">外站汇总</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-toggle="modal" data-target=".bd-example-modal-sm">本站帖子</a>
+                            </li>
+                        </ul>
+                        <form class="form-inline">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                    </div>
+                </nav>
+                <!--弹出层-->
+                <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-sm modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title h4" id="mySmallModalLabel">暂未开放。</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <!--<div class="modal-body">-->
+                                <!--...-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                </div>
+                <!--表格-->
+                <!--<div class="table-responsive" style="height:570px">-->
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered">
+                    <thead class="table-bordered">
+                    <tr>
+                        <th width="70%"  scope="col" style="text-align:center;">标题</th>
+                        <th width="20%"  scope="col" style="text-align:center;">发布时间</th>
+                        <th width="10%" scope="col" style="text-align:center;">来源</th>
+                    </tr>
+                    </thead>
+                    <tbody id="listBody">
+                    <#list pageInfo.list as info>
+                    <tr postId="${info.id}">
+                        <td>${info.title}</td>
+                        <td style="text-align:center;">${info.publishtime?string('yyyy-MM-dd')}</td>
+                        <td style="text-align:center;">${info.source}</td>
+                    </tr>
+                    </#list>
+                    </tbody>
+                </table>
+                </div>
+                <!--分页-->
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center" id="pageLimit1">
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <script src="/js/jquery-3.2.1.min.js"></script>
+    <script src="/js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="/js/bootstrap-paginator.js"></script>
+    <script src="/js/DateToStr.js"></script>
+    <script>
+        var options = {
+            currentPage: ${pageInfo.pageNum},//当前的请求页面
+            totalPages: ${pageInfo.pages},//一共多少页
+            bootstrapMajorVersion: 3,//bootstrap的版本要求
+            onPageClicked: function(event, originalEvent, type, page) {
+                $.ajax({
+                    url:'/postinfo/list/'+page,
+                    success:function (res) {
+                        var list=res.list;
+                        var resHtml="";
+                        for (var i=0;i<list.length;i++)
+                        {
+                            resHtml+="<tr>";
+                            resHtml+="<td>"+list[i].title+"</td><td style=\"text-align:center;\">"+list[i].publishtime.split(" ")[0]+"</td><td style=\"text-align:center;\">"+list[i].source+"</td>";
+                            resHtml+="</tr>";
+                        }
+                        $('#listBody').html(resHtml);
+                    }
+                })
+            }
+        }
+        $('#pageLimit1').bootstrapPaginator(options);
+        $('#listBody tr').click(function () {
+                var postId= $(this).attr("postId");
+                window.location.href = "/postinfo/detail/"+ postId;
+            }
+        )
+    </script>
+</body>
+</html>
