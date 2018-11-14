@@ -40,10 +40,10 @@ public class PostInfoController {
         return pageInfo;
     }
 
-    @ResponseBody
     @RequestMapping("/detail/{postId}")
-    public PostInfo pageDetail(@PathVariable int postId){
+    public String pageDetail(@PathVariable int postId,Model model){
         PostInfo PI =postInfoService.findById(postId);
-        return PI;
+        model.addAttribute("postInfo",PI);
+        return "postDetail";
     }
 }

@@ -101,7 +101,7 @@
                         var resHtml="";
                         for (var i=0;i<list.length;i++)
                         {
-                            resHtml+="<tr>";
+                            resHtml+="<tr postId=\""+list[i].id+"\">";
                             resHtml+="<td>"+list[i].title+"</td><td style=\"text-align:center;\">"+list[i].publishtime.split(" ")[0]+"</td><td style=\"text-align:center;\">"+list[i].source+"</td>";
                             resHtml+="</tr>";
                         }
@@ -111,11 +111,10 @@
             }
         }
         $('#pageLimit1').bootstrapPaginator(options);
-        $('#listBody tr').click(function () {
+        $('#listBody').on('click','tr',function () {
                 var postId= $(this).attr("postId");
                 window.location.href = "/postinfo/detail/"+ postId;
-            }
-        )
+        })
     </script>
 </body>
 </html>
