@@ -11,6 +11,6 @@ public class IndexController {
     @RequestMapping("/")
     public ModelAndView  index()
     {
-        return new ModelAndView("forward:/postinfo/list");
+        return new ModelAndView("forward:/postinfo/list/1");
     }
 }

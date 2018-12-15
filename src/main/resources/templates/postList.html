@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>EZDate</title>
+    <meta name="keywords" content="简约,简约网,交友,交友网,网上交友,交友中心,年轻人交友,学生交友,同城交友,同城约会吧,约会吧交友,沈阳交友,沈阳高校交友,沈阳高校,沈阳论坛" />
+    <meta name="description" content="沈阳简约网：致力于打造属于沈阳年轻人的交友约会平台" />
+    <title>沈阳简约网</title>
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css">
     <style>
@@ -67,7 +69,7 @@
                     </thead>
                     <tbody id="listBody">
                     <#list pageInfo.list as info>
-                    <tr postId="${info.id}">
+                    <tr postId="${info.id?c}">
                         <td>${info.title}</td>
                         <td style="text-align:center;">${info.publishtime?string('yyyy-MM-dd')}</td>
                         <td style="text-align:center;">${info.source}</td>
@@ -94,23 +96,11 @@
             totalPages: ${pageInfo.pages},//一共多少页
             bootstrapMajorVersion: 3,//bootstrap的版本要求
             onPageClicked: function(event, originalEvent, type, page) {
-                $.ajax({
-                    url:'/postinfo/list/'+page,
-                    success:function (res) {
-                        var list=res.list;
-                        var resHtml="";
-                        for (var i=0;i<list.length;i++)
-                        {
-                            resHtml+="<tr postId=\""+list[i].id+"\">";
-                            resHtml+="<td>"+list[i].title+"</td><td style=\"text-align:center;\">"+list[i].publishtime.split(" ")[0]+"</td><td style=\"text-align:center;\">"+list[i].source+"</td>";
-                            resHtml+="</tr>";
-                        }
-                        $('#listBody').html(resHtml);
-                    }
-                })
+                window.location.href = "/postinfo/list/"+ page;
             }
         }
         $('#pageLimit1').bootstrapPaginator(options);
+        //为列表添加点击事件
         $('#listBody').on('click','tr',function () {
                 var postId= $(this).attr("postId");
                 window.location.href = "/postinfo/detail/"+ postId;

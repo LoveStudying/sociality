@@ -21,23 +21,13 @@ public class PostInfoController {
     //暂时在这里写下页数
     private final int pageSize =12;
 
-    @RequestMapping("/list")
-    public String  index(Model model){
-        PageHelper.startPage(1, pageSize);
+    @RequestMapping("/list/{pageNum}")
+    public String  index(Model model,@PathVariable int pageNum){
+        PageHelper.startPage(pageNum, pageSize);
         List<PostInfo> list =postInfoService.findPostInfoList();
         PageInfo<PostInfo> pageInfo = new PageInfo<>(list);
         model.addAttribute("pageInfo",pageInfo);
         return "postList";
-    }
-
-
-    @ResponseBody
-    @RequestMapping("/list/{pageNum}")
-    public PageInfo<PostInfo> pageList(@PathVariable int pageNum){
-        PageHelper.startPage(pageNum,pageSize);
-        List<PostInfo> list =postInfoService.findPostInfoList();
-        PageInfo<PostInfo> pageInfo = new PageInfo<>(list);
-        return pageInfo;
     }
 
     @RequestMapping("/detail/{postId}")
