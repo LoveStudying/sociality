@@ -26,3 +26,12 @@ create table if not exists user(
     phone varchar(64) DEFAULT NULL COMMENT '手机号',
     sign varchar(524) DEFAULT NULL COMMENT '个人签名'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 访客IP表
+create table if not exists visitorInfo(
+    visitorIP varchar(20) COMMENT '访客ip',
+    visitTime datet NOT NULL COMMENT '访问日期',
+		visitNum int DEFAULT 1 COMMENT '访问次数',
+    lastFreshtime datetime DEFAULT CURRENT_TIMESTAMP COMMENT  '当日最后刷新时间',
+		PRIMARY KEY(visitorIP,visitTime)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -1,7 +1,7 @@
 package com.zyl.sociality.webMagic;
 
 import com.zyl.sociality.domain.PostInfo;
-import com.zyl.sociality.utils.StrToDate;
+import com.zyl.sociality.utils.DateHelper;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Page;
@@ -24,7 +24,7 @@ public class DouBanPageProcessor implements PageProcessor {
             info.setContent(html.xpath("//div[@class='topic-richtext']").toString());
             info.setSourceUrl(html.getDocument().location());
             info.setSource("豆瓣");
-            info.setPublishtime(StrToDate.StrToDate(html.xpath("//span[@class='color-green']/text()").toString()));
+            info.setPublishtime(DateHelper.strToDate(html.xpath("//span[@class='color-green']/text()").toString()));
             //page.putField("title", page.getHtml().xpath("//title/text()").toString());
         }
         catch(Exception e){

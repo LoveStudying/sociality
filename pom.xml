@@ -5,7 +5,7 @@
 
     <groupId>com.zyl</groupId>
     <artifactId>sociality</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.3</version>
     <packaging>jar</packaging>
 
     <name>sociality</name>
