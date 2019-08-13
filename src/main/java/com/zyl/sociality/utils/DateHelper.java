@@ -27,8 +27,8 @@ public class DateHelper {
      *
      * @return返回长时间格式 yyyy-MM-dd HH:mm:ss
      */
-    public static Date getSqlDate() {
-        Date sqlDate = new java.sql.Date(new Date().getTime());
+    public static Date getNowTime() {
+        Date sqlDate = new Date();
         return sqlDate;
     }
 }

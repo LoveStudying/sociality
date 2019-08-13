@@ -9,4 +9,5 @@ public interface PostInfoService {
     int save(PostInfo postInfo);
     List<PostInfo> findPostInfoList();
     PostInfo findById(int id);
+    void distinctPost();
 }

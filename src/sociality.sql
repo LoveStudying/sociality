@@ -35,3 +35,11 @@ create table if not exists visitorInfo(
     lastFreshtime datetime DEFAULT CURRENT_TIMESTAMP COMMENT  '当日最后刷新时间',
 		PRIMARY KEY(visitorIP,visitTime)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 楼盘价格表
+create table if not exists buildInfo(
+    id int primary key auto_increment,
+    build_name varchar(20) COMMENT '楼盘名称',
+    build_price varchar(20) COMMENT '楼盘价格',
+    info_date date COMMENT '更新时间'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

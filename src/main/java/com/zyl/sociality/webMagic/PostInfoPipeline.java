@@ -6,6 +6,7 @@ import com.zyl.sociality.domain.PostInfo;
 import com.zyl.sociality.service.PostInfoService;
 import com.zyl.sociality.service.impl.PostInfoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
@@ -28,5 +29,10 @@ public class PostInfoPipeline implements Pipeline {
     public void process(ResultItems resultItems, Task task) {
         PostInfo info = (PostInfo)resultItems.get("info");
         postInfoPipeline.postInfoService.save(info);
+    }
+
+    @Scheduled(cron = "0 0 3 * * ?")
+    public void distinctPost(){
+        postInfoService.distinctPost();
     }
 }

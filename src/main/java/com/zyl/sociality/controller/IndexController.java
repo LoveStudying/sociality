@@ -28,7 +28,7 @@ public class IndexController {
         //记录进入首页的IP
         VisitorInfo vi =new VisitorInfo();
         vi.setVisitorIP(IpHelper.getIpAddress(request));
-        vi.setVisitTime(DateHelper.getSqlDate());
+        vi.setVisitTime(DateHelper.getNowTime());
         visitorInfoService.save(vi);
         return new ModelAndView("forward:/postinfo/list/1");
     }

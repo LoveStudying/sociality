@@ -20,7 +20,6 @@ public class PostInfoServiceImpl implements PostInfoService {
 
     @Override
     public List<PostInfo> findPostInfoList() {
-
         List<PostInfo> list = postInfoMapper.findPostInfoList();
         return list;
     }
@@ -29,5 +28,10 @@ public class PostInfoServiceImpl implements PostInfoService {
     public PostInfo findById(int id) {
         PostInfo info = postInfoMapper.findById(id);
         return info;
+    }
+
+    @Override
+    public void distinctPost() {
+        postInfoMapper.distinctPost();
     }
 }
