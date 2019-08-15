@@ -22,4 +22,7 @@ public interface PostInfoMapper {
 
     @Delete("DELETE FROM postinfo WHERE id IN (SELECT id FROM (SELECT min(id) as id FROM `postinfo` GROUP BY source_url HAVING count(1)>1) a)")
     int distinctPost();
+
+    @Select("SELECT * FROM postinfo WHERE MATCH (title,content) AGAINST (#{words}) ORDER BY publishtime")
+    List<PostInfo> searchPost(String words);
 }

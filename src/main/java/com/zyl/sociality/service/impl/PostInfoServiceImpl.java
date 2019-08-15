@@ -34,4 +34,9 @@ public class PostInfoServiceImpl implements PostInfoService {
     public void distinctPost() {
         postInfoMapper.distinctPost();
     }
+
+    @Override
+    public List<PostInfo> searchPost(String words) {
+       return postInfoMapper.searchPost(words);
+    }
 }

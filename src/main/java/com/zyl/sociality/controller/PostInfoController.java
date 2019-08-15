@@ -4,13 +4,16 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.zyl.sociality.domain.PostInfo;
 import com.zyl.sociality.service.PostInfoService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -22,9 +25,15 @@ public class PostInfoController {
     private final int pageSize =12;
 
     @RequestMapping("/list/{pageNum}")
-    public String  index(Model model,@PathVariable int pageNum){
+    public String  index(Model model,@PathVariable int pageNum,String search){
         PageHelper.startPage(pageNum, pageSize);
-        List<PostInfo> list =postInfoService.findPostInfoList();
+        List<PostInfo> list=new ArrayList<>();
+        if (StringUtils.isBlank(search))
+        {
+            list =postInfoService.findPostInfoList();
+        }else{
+            list =postInfoService.searchPost(search);
+        }
         PageInfo<PostInfo> pageInfo = new PageInfo<>(list);
         model.addAttribute("pageInfo",pageInfo);
         return "postList";

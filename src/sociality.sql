@@ -10,7 +10,8 @@ create table if not exists postInfo(
     owner_img varchar(100) DEFAULT NULL COMMENT '发布者头像',
     owner_name varchar(20) DEFAULT NULL COMMENT '发布者名字',
     publishtime date DEFAULT NULL COMMENT '发布时间',
-    freshtime date DEFAULT NULL COMMENT  '最后刷新时间'
+    freshtime date DEFAULT NULL COMMENT  '最后刷新时间',
+    FULLTEXT KEY `fulltext_post` (title,content) WITH PARSER ngram
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

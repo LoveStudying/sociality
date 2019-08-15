@@ -10,4 +10,5 @@ public interface PostInfoService {
     List<PostInfo> findPostInfoList();
     PostInfo findById(int id);
     void distinctPost();
+    List<PostInfo> searchPost(String words);
 }

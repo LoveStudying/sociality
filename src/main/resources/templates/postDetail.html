@@ -27,8 +27,8 @@
                                 <a class="nav-link" href="#" data-toggle="modal" data-target=".bd-example-modal-sm">本站帖子</a>
                             </li>
                         </ul>
-                        <form class="form-inline">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <form class="form-inline" action="/postinfo/list/1">
+                            <input class="form-control mr-sm-2" type="text" aria-label="Search" required="required" name="search" value=${(seachText)!""}>
                             <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
                         </form>
                     </div>
