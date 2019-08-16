@@ -36,6 +36,7 @@ public class PostInfoController {
         }
         PageInfo<PostInfo> pageInfo = new PageInfo<>(list);
         model.addAttribute("pageInfo",pageInfo);
+        model.addAttribute("seachText",search);
         return "postList";
     }
 

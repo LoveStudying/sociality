@@ -455,6 +455,17 @@
 
             pageStart = pageStart < 1 ? 1 : pageStart;//check the range of the page start to see if its less than 1.
 
+            if (this.numberOfPages % 2 !== 0) {
+                var padWith = (this.numberOfPages - 1) / 2;
+                if (this.currentPage - padWith <= 0) {
+                    pageStart = 1;
+                } else if (this.currentPage + padWith > this.totalPages || (this.totalPages - this.numberOfPages + 1) <= 0) {
+                    pageStart = this.totalPages - this.numberOfPages + 1;
+                } else {
+                    pageStart = this.currentPage - padWith;
+                }
+            }
+
             for (i = pageStart, counter = 0; counter < this.numberOfPages && i <= totalPages; i = i + 1, counter = counter + 1) {//fill the pages
                 output.push(i);
             }

@@ -18,7 +18,8 @@ public enum BuildPriceEnum {
     B8("保利紫荆公馆", "https://sy.lianjia.com/xiaoqu/3115502611090625/"),
     B9("中海康城橙郡","https://sy.lianjia.com/xiaoqu/3116867952724689/"),
     B10("恒大名都三期","https://sy.lianjia.com/xiaoqu/3120032894566488/"),
-    B11("碧桂园公园里","https://sy.lianjia.com/xiaoqu/3117887322713220/")
+    B11("碧桂园公园里","https://sy.lianjia.com/xiaoqu/3117887322713220/"),
+    B12("万科新榆公馆","https://sy.lianjia.com/xiaoqu/3113463991103809/")
     ;
 
     private String buildName;

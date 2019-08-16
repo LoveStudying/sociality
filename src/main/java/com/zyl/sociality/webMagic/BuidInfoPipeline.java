@@ -30,7 +30,6 @@ public class BuidInfoPipeline implements Pipeline {
     @Override
     public void process(ResultItems resultItems, Task task) {
         BuildInfo info = (BuildInfo)resultItems.get("info");
-        System.out.println(info);
         buidInfoPipeline.buildInfoService.save(info);
     }
 }
