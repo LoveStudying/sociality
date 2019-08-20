@@ -19,6 +19,7 @@ create table if not exists postInfo(
 create table if not exists user(
     id int primary key auto_increment,
     user_name varchar (20) DEFAULT NULL COMMENT '昵称',
+    pass_word varchar (20) DEFAULT NULL COMMENT '密码',
     city varchar(64) DEFAULT NULL COMMENT '城市',
     sex tinyint(2) DEFAULT '-1' COMMENT '0表示女，1表示男',
     user_img varchar(100) DEFAULT NULL COMMENT '头像',
@@ -31,7 +32,7 @@ create table if not exists user(
 -- 访客IP表
 create table if not exists visitorInfo(
     visitorIP varchar(20) COMMENT '访客ip',
-    visitTime datet NOT NULL COMMENT '访问日期',
+    visitTime date NOT NULL COMMENT '访问日期',
 		visitNum int DEFAULT 1 COMMENT '访问次数',
     lastFreshtime datetime DEFAULT CURRENT_TIMESTAMP COMMENT  '当日最后刷新时间',
 		PRIMARY KEY(visitorIP,visitTime)

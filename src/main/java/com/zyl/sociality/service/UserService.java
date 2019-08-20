@@ -10,4 +10,6 @@ public interface UserService {
     User findById(int id);
 
     List<User> findUserList();
+
+    User login(String userName,String passWord);
 }

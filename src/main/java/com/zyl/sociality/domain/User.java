@@ -12,6 +12,7 @@ public class User implements Serializable {
 
     int id;
     String userName;
+    String passWord;
     String city;
     int sex;
     String userImg;

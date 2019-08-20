@@ -29,4 +29,9 @@ public class UserServiceImpl implements UserService {
         List<User> list = userMapper.findUserList();
         return list;
     }
+
+    @Override
+    public User login(String userName, String passWord) {
+        return userMapper.login(userName,passWord);
+    }
 }
