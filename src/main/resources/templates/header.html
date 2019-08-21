@@ -15,8 +15,7 @@
                 <a class="nav-link" href="#" data-toggle="modal" data-target=".bd-example-modal-sm">本站帖子</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" data-toggle="modal"
-                   data-target="#exampleModal">${(userInfo.userName)!"登录"}</a>
+                <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal">${loginName!"登录"}</a>
             </li>
         </ul>
         <form class="form-inline" action="/postinfo/list/1">
@@ -46,7 +45,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <form action="/user/login" method="post">
+                <form id="loginForm" method="post">
                     <div class="form-group">
                         <label for="exampleInputEmail1">用户名</label>
                         <input type="text" class="form-control" id="exampleInputEmail1"
@@ -63,7 +62,7 @@
                     </div>
                     <small id="emailHelp" class="form-text text-muted">网站目前是邀请制，无账户请使用游客模式</small>
                     <div style="text-align:right;margin-top: 10px;">
-                        <button type="submit" class="btn btn-primary">登录</button>
+                        <button id="loginBtn" class="btn btn-primary">登录</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">游客浏览</button>
                     </div>
                 </form>
@@ -71,3 +70,25 @@
         </div>
     </div>
 </div>
+<script>
+    $("#loginBtn").click(function () {
+        var data = $("#loginForm").serialize();
+        $.ajax({
+            type: 'post',
+            url: '/user/login',
+            data: data,  //重点必须为一个变量如：data
+            dataType: 'json',
+            success: function (res) {
+                if (res = true) {
+                    alert('chenggong' + res);
+                    window.location.replace(window.location.href);
+                } else {
+                    alert('失败' + res);
+                }
+            },
+            error: function (res) {
+                alert('失败' + res);
+            }
+        })
+    })
+</script>

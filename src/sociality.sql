@@ -18,8 +18,10 @@ create table if not exists postInfo(
 -- 用户表
 create table if not exists user(
     id int primary key auto_increment,
-    user_name varchar (20) DEFAULT NULL COMMENT '昵称',
+    user_name varchar (20) DEFAULT NULL COMMENT '用户名',
+    nick_name varchar(20) DEFAULT NULL COMMENT '用户昵称',
     pass_word varchar (20) DEFAULT NULL COMMENT '密码',
+    type varchar(10) DEFAULT NULL COMMENT '用户类型',
     city varchar(64) DEFAULT NULL COMMENT '城市',
     sex tinyint(2) DEFAULT '-1' COMMENT '0表示女，1表示男',
     user_img varchar(100) DEFAULT NULL COMMENT '头像',

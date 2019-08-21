@@ -13,12 +13,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 @RequestMapping("/postinfo")
 public class PostInfoController {
+    @Autowired
+    HttpServletRequest request;
     @Autowired
     private PostInfoService postInfoService;
     //暂时在这里写下页数
@@ -35,6 +38,7 @@ public class PostInfoController {
             list =postInfoService.searchPost(search);
         }
         PageInfo<PostInfo> pageInfo = new PageInfo<>(list);
+        model.addAttribute("loginName",request.getAttribute("userName"));
         model.addAttribute("pageInfo",pageInfo);
         model.addAttribute("seachText",search);
         return "postList";
@@ -43,6 +47,7 @@ public class PostInfoController {
     @RequestMapping("/detail/{postId}")
     public String pageDetail(@PathVariable int postId,Model model){
         PostInfo PI =postInfoService.findById(postId);
+        model.addAttribute("loginName",request.getAttribute("userName"));
         model.addAttribute("postInfo",PI);
         return "postDetail";
     }
