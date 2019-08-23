@@ -1,8 +1,7 @@
 package com.zyl.sociality.webMagic;
 
 import com.zyl.sociality.domain.BuildInfo;
-import com.zyl.sociality.domain.PostInfo;
-import com.zyl.sociality.enums.BuildPriceEnum;
+import com.zyl.sociality.common.BuildPriceEnum;
 import com.zyl.sociality.utils.DateHelper;
 import org.springframework.scheduling.annotation.Scheduled;
 import us.codecraft.webmagic.Page;
@@ -10,9 +9,6 @@ import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.selector.Html;
-
-import java.time.Clock;
-import java.time.LocalDate;
 
 /**
  * @author zhuyanlin

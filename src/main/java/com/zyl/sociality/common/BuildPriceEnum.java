@@ -1,5 +1,6 @@
-package com.zyl.sociality.enums;
+package com.zyl.sociality.common;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
@@ -7,6 +8,7 @@ import lombok.Getter;
  * @date 2019/8/12 16:31
  */
 @Getter
+@AllArgsConstructor
 public enum BuildPriceEnum {
     B1("恒大雅苑", "https://sy.lianjia.com/xiaoqu/3115388196767878/"),
     B2("碧桂园学府壹号", "https://sy.lianjia.com/xiaoqu/3115347486329454/"),
@@ -24,9 +26,4 @@ public enum BuildPriceEnum {
 
     private String buildName;
     private String buildUrl;
-
-    BuildPriceEnum(String buildName, String buildUrl) {
-        this.buildName = buildName;
-        this.buildUrl = buildUrl;
-    }
 }

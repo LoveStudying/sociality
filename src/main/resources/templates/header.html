@@ -7,7 +7,7 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarColor02">
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav mr-auto" id="navbarUl01">
             <li class="nav-item active">
                 <a class="nav-link" href="#">外站汇总</a>
             </li>
@@ -15,7 +15,7 @@
                 <a class="nav-link" href="#" data-toggle="modal" data-target=".bd-example-modal-sm">本站帖子</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal">${loginName!"登录"}</a>
+                <a class="nav-link" href="#" data-toggle="${loginName???string('','modal')}" data-target="#exampleModal">${loginName!"登录"}</a>
             </li>
         </ul>
         <form class="form-inline" action="/postinfo/list/1">
@@ -91,4 +91,8 @@
             }
         })
     })
+    // $("ul li").click(function(index) {
+    //     $(this).find('span').addClass('active');
+    //     $(this).siblings().find("span").removeClass('active');
+    // });
 </script>
