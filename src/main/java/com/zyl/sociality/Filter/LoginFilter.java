@@ -22,12 +22,11 @@ public class LoginFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         //以.js.css 结尾的文件不进行过滤
-        if (StringUtils.endsWithAny(request.getRequestURL(),".js",".css",".ico","map"))
+        if (StringUtils.endsWithAny(request.getRequestURL(),".js",".css",".ico",".map"))
         {
             filterChain.doFilter(request, servletResponse);
             return;
         }
-        System.out.println(request.getRequestURL());
         //先检查session
         if (request.getSession().getAttribute("userName") == null) {
             Cookie[] cookies = request.getCookies();

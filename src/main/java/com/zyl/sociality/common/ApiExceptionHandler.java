@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ApiExceptionHandler {
     @ExceptionHandler(BizException.class)
-    public ResponseEntity findEsException(BizException ex) {
-        ApiOut out = new ApiOut(ex.getCode(), ex.getMessage(),"");
-        return new ResponseEntity(out, HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<ApiOut<String>> findEsException(BizException ex) {
+        ApiOut<String> out = new ApiOut<>(ex.getCode(), ex.getMessage(),"");
+        return new ResponseEntity<>(out, HttpStatus.OK);
     }
 }

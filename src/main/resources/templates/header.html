@@ -7,15 +7,21 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarColor02">
-        <ul class="navbar-nav mr-auto" id="navbarUl01">
+        <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">外站汇总</a>
+                <a class="nav-link" href="">外站汇总</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" data-toggle="modal" data-target=".bd-example-modal-sm">本站帖子</a>
+                <a class="nav-link" href="" data-toggle="modal" data-target=".bd-example-modal-sm">本站帖子</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" data-toggle="${loginName???string('','modal')}" data-target="#exampleModal">${loginName!"登录"}</a>
+            <li class="nav-item" style="display: ${loginName???string('none','inline')};">
+                <a class="nav-link" href="" data-toggle="modal" data-target="#exampleModal" >登录</a>
+            </li>
+            <li class="nav-item dropdown" style="display: ${loginName???string('inline','none')};">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">${loginName!"登录"}</a>
+                <div class="dropdown-menu">
+                    <a id="loginOut" class="dropdown-item" href="">退出</a>
+                </div>
             </li>
         </ul>
         <form class="form-inline" action="/postinfo/list/1">
@@ -41,7 +47,7 @@
 </div>
 <!--登录弹出层-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
+     aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-body">
@@ -79,17 +85,19 @@
             data: data,  //重点必须为一个变量如：data
             dataType: 'json',
             success: function (res) {
-                if (res = true) {
-                    alert('chenggong' + res);
-                    window.location.replace(window.location.href);
-                } else {
-                    alert('失败' + res);
+                if (res.data == "true" ) {
+                    window.location.reload()
+                }else{
+
                 }
-            },
-            error: function (res) {
-                alert('失败' + res);
             }
         })
+    })
+    $('#loginOut').click(function(){
+        $.post('/user/loginOut',
+            function(res) {
+                window.location.reload()
+            })
     })
     // $("ul li").click(function(index) {
     //     $(this).find('span').addClass('active');
