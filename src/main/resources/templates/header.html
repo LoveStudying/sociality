@@ -47,11 +47,14 @@
 </div>
 <!--登录弹出层-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true" data-backdrop="static">
+     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-body">
                 <form id="loginForm" method="post">
+                    <div class="alert alert-danger" role="alert" id="passwordWrong" style="display: none;">
+                        用户名密码不匹配，再好好想想吧。
+                    </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">用户名</label>
                         <input type="text" class="form-control" id="exampleInputEmail1"
@@ -68,7 +71,7 @@
                     </div>
                     <small id="emailHelp" class="form-text text-muted">网站目前是邀请制，无账户请使用游客模式</small>
                     <div style="text-align:right;margin-top: 10px;">
-                        <button id="loginBtn" class="btn btn-primary">登录</button>
+                        <button type="button" id="loginBtn" class="btn btn-primary">登录</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">游客浏览</button>
                     </div>
                 </form>
@@ -86,9 +89,12 @@
             dataType: 'json',
             success: function (res) {
                 if (res.data == "true" ) {
-                    window.location.reload()
+                    window.location.reload();
                 }else{
-
+                    $('#passwordWrong').css("display","block");
+                    setTimeout(function(){
+                        $('#passwordWrong').css("display","none");
+                    },4000);
                 }
             }
         })
