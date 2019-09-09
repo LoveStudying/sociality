@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>在线聊天室</title>
+    <script src="/js/jquery-3.2.1.min.js"></script>
+
+
+    <link rel="stylesheet" href="assets/font-awesome/4.5.0/css/font-awesome.min.css" />
+
+    <!-- page specific plugin styles -->
+
+    <!-- text fonts -->
+    <link rel="stylesheet" href="assets/css/fonts.googleapis.com.css" />
+
+    <!-- ace styles -->
+
+    <link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+    <link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="/js/bootstrap/bootstrap.min.js"></script>
+    <script src="assets/js/ace-extra.min.js"></script>
+    <style type="text/css">
+        .talk_con{
+            width:600px;
+            height:500px;
+            border:1px solid #666;
+            margin:50px auto 0;
+            background:#f9f9f9;
+        }
+        .talk_show{
+            width:580px;
+            height:420px;
+            border:1px solid #666;
+            background:#fff;
+            margin:10px auto 0;
+            overflow:auto;
+        }
+        .talk_input{
+            width:580px;
+            margin:10px auto 0;
+        }
+        .talk_word{
+            width:88%;
+            height:30px;
+            padding:0px;
+            float:left;
+            outline:none;
+            text-indent:10px;
+        }
+        .talk_sub{
+            width:10%;
+            height:30px;
+            float:left;
+            margin-left:10px;
+        }
+        .atalk{
+            margin:10px;
+        }
+        .atalk span{
+            display:inline-block;
+            background:#0181cc;
+            border-radius:10px;
+            color:#fff;
+            padding:5px 10px;
+        }
+        .btalk{
+            margin:10px;
+            text-align:right;
+        }
+        .btalk span{
+            display:inline-block;
+            background:#ef8201;
+            border-radius:10px;
+            color:#fff;
+            padding:5px 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <#include "header.html">
+<!--        <button class="btn btn-warning" onclick="doClose();">退出聊天</button>-->
+            <div class="talk_con">
+                <div class="talk_show" id="words">
+                </div>
+                <div class="talk_input">
+                    <input type="text" class="talk_word" id="talkwords">
+                    <input type="button" value="发送" class="talk_sub" id="talksub">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script type="text/javascript">
+    var ws = new WebSocket("ws://localhost:80/websocket"); //controller层url
+    $(function () {
+        $("#talkwords").keyup(function (evt) {
+            if (evt.which == 13) { //enter键发送消息
+                var htm ="${loginName}:"+$("#talkwords").val();
+                alert(htm);
+                doSend(htm);
+                $("#talkwords").val("").focus();
+            }
+        });
+        $("#talksub").click(function () {
+                var htm = "${loginName}:"+$("#talkwords").val();
+            alert(htm);
+                doSend(htm);
+                $("#talkwords").val("").focus();
+        });
+    });
+
+    ws.onopen = function () {
+        appendHtm("连接成功！",3);
+    };
+    // 从服务端接收到消息，将消息回显到聊天记录区
+    ws.onmessage = function (evt) {
+        appendHtm(evt.data,2);
+    };
+
+    ws.onerror = function () {
+        appendHtm("连接失败！",3);
+    };
+
+    ws.onclose = function () {
+        appendHtm("连接关闭！",3);
+    };
+
+    function appendHtm(htm,type) {
+        if(type==1) {
+            $("#words").append ("<div class=\"btalk\"><span>"+htm+"</span></div>")
+        }else if (type==2){
+            $("#words").append ("<div class=\"atalk\"><span>"+htm+"</span></div>");
+        } else if (type==3){
+            $("#words").append ("<div style=\" text-align: center; \"><span>"+htm+"</span></div>");
+        }
+
+    }
+
+    // 注销登录
+    function doClose() {
+        ws.close();
+    }
+
+    // 发送消息
+    function doSend(htm) {
+        appendHtm(htm,1);
+        ws.send(htm);
+    }
+</script>
+</html>

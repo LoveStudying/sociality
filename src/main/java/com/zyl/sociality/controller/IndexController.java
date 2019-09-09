@@ -6,6 +6,7 @@ import com.zyl.sociality.utils.DateHelper;
 import com.zyl.sociality.utils.IpHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,9 +22,12 @@ public class IndexController {
     @Autowired
     private VisitorInfoService visitorInfoService;
 
+    @Autowired
+    HttpServletRequest request;
+
     //用来设置默认首页，效果也不错
     @RequestMapping("/")
-    public ModelAndView  index(HttpServletRequest request)
+    public ModelAndView index()
     {
         //记录进入首页的IP
         VisitorInfo vi =new VisitorInfo();
@@ -43,5 +47,11 @@ public class IndexController {
         String lineSeparator = System.getProperty("line.separator", "\n");
         writer.append("User-agent: *").append(lineSeparator);
         writer.append("Disallow:").append("  ").append(lineSeparator);
+    }
+
+    @GetMapping("/im")
+    public String im(Model model){
+        model.addAttribute("loginName",request.getAttribute("userName"));
+        return "im";
     }
 }

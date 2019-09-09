@@ -6,6 +6,7 @@ import com.zyl.sociality.domain.User;
 import com.zyl.sociality.mapper.UserMapper;
 import com.zyl.sociality.service.UserService;
 import com.zyl.sociality.utils.JwtHelper;
+import com.zyl.sociality.utils.MD5Util;
 import org.omg.PortableInterceptor.USER_EXCEPTION;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(String userName, String passWord) {
-        User user =userMapper.login(userName,passWord);
+        User user =userMapper.login(userName, MD5Util.encodeMd5(passWord));
         if(user !=null){
             return user;
         }else{
