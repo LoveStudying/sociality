@@ -9,7 +9,7 @@
     <div class="collapse navbar-collapse" id="navbarColor02">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="">外站汇总</a>
+                <a class="nav-link" href="/postinfo/list/1">外站汇总</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="" data-toggle="modal" data-target=".bd-example-modal-sm">本站帖子</a>
@@ -40,7 +40,7 @@
     <div class="modal-dialog modal-sm modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title h4" id="mySmallModalLabel">请先登录！</h5>
+                <h5 class="modal-title h4" id="mySmallModalLabel">${loginName???string('暂未开放。','请先登录！')}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>

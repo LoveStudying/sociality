@@ -96,22 +96,22 @@
         </div>
     </div>
 </div>
-
+git
 </body>
 <script type="text/javascript">
-    var ws = new WebSocket("ws://localhost:80/websocket"); //controller层url
+
+    var wsServer = "ws://"+window.location.host+"/websocket";
+    var ws = new WebSocket(wsServer);
     $(function () {
         $("#talkwords").keyup(function (evt) {
             if (evt.which == 13) { //enter键发送消息
                 var htm ="${loginName}:"+$("#talkwords").val();
-                alert(htm);
                 doSend(htm);
                 $("#talkwords").val("").focus();
             }
         });
         $("#talksub").click(function () {
                 var htm = "${loginName}:"+$("#talkwords").val();
-            alert(htm);
                 doSend(htm);
                 $("#talkwords").val("").focus();
         });

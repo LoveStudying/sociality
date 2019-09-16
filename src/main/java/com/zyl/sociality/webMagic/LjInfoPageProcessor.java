@@ -4,6 +4,7 @@ import com.zyl.sociality.domain.BuildInfo;
 import com.zyl.sociality.common.BuildPriceEnum;
 import com.zyl.sociality.utils.DateHelper;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
@@ -14,6 +15,7 @@ import us.codecraft.webmagic.selector.Html;
  * @author zhuyanlin
  * @date 2019/8/12 14:07
  */
+@Component
 public class LjInfoPageProcessor implements PageProcessor {
     // 部分一：抓取网站的相关配置，包括编码、抓取间隔、重试次数等
     private Site site = Site.me().setRetryTimes(3).addHeader("User-Agent","Mozilla/5.0 (Windows NT 6.1; WOW64; rv:53.0) Gecko/20100101 Firefox/53.0");
